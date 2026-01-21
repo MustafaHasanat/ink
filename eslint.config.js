@@ -15,21 +15,17 @@ export default defineConfig([
     extends: [
       js.configs.recommended,
       tseslint.configs.recommended,
-      reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
-      "eslint:recommended",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react-hooks/recommended",
-      "plugin:storybook/recommended",
     ],
-    ignorePatterns: ["dist", ".eslintrc.cjs"],
-    parser: "@typescript-eslint/parser",
-    plugins: ["react-refresh"],
+    plugins: {
+      "react-hooks": reactHooks,
+    },
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
     },
     rules: {
+      ...reactHooks.configs.recommended.rules,
       "react-refresh/only-export-components": [
         "warn",
         { allowConstantExport: true },
@@ -39,4 +35,5 @@ export default defineConfig([
       "@typescript-eslint/no-explicit-any": "off",
     },
   },
+  ...storybook.configs["flat/recommended"],
 ]);

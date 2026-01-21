@@ -36,7 +36,7 @@ export const Header = (): JSX.Element => {
       <div className="flex items-center gap-3">
         {mode === "view" && (
           <>
-            <SharedSelect
+            <SharedSelect<InkBrushHeaderSchemaType>
               name="component"
               control={control}
               postOnChange={(event) => {
@@ -77,7 +77,7 @@ export const Header = (): JSX.Element => {
           </>
         )}
 
-        <SharedSelect
+        <SharedSelect<InkBrushHeaderSchemaType>
           name="mode"
           control={control}
           postOnChange={(event) => {

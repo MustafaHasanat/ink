@@ -1,9 +1,5 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
-
 import { JSX, useCallback } from "react";
 import { useInkContext } from "@/hooks";
 import { getBottleDrop } from "@/helpers";

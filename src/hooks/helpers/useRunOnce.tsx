@@ -3,8 +3,7 @@
 import { useEffect, useRef } from "react";
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  fn: any;
+  fn: () => void;
   dependencies?: string[];
 }
 
@@ -21,5 +20,6 @@ export const useRunOnce = ({ fn, dependencies = [] }: Props) => {
     isRunBefore.current = true;
 
     fn();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, dependencies);
 };

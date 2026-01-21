@@ -1,6 +1,5 @@
 import axios from "axios";
 import { BottleType, InkConfig, ItemResponse } from "@/types";
-import { join } from "path";
 
 interface Props {
   config: InkConfig;
@@ -13,7 +12,7 @@ export async function getBottleData({
     const response = await axios.request<ItemResponse<any>>({
       method: "get",
       maxBodyLength: Infinity,
-      url: join(config.backendUrl, config?.getConfig?.endpoint),
+      url: `${config.backendUrl}${config?.getConfig?.endpoint || ""}`,
       ...(config?.getConfig?.axiosConfig || {}),
     });
 

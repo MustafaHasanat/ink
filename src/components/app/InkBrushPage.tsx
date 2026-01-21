@@ -42,6 +42,7 @@ export const InkBrushPage = (): JSX.Element => {
     }
 
     return <></>;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode, lang, currentComponentKey]);
 
   return (

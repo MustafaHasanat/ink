@@ -1,7 +1,5 @@
 "use client";
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
 export type ViewerProviderProps = {

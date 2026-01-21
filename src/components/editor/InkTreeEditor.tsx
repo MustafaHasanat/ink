@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { FormEvent, useEffect, useState } from "react";
@@ -12,7 +11,6 @@ import {
 import { treeHandler } from "@/helpers";
 import { useInkContext } from "@/hooks";
 import axios from "axios";
-import { join } from "path";
 import { toast } from "sonner";
 
 /**
@@ -26,7 +24,7 @@ export const InkTreeEditor = () => {
   const [objectData, setObjectData] = useState<BottleType | null>(null);
 
   useEffect(() => {
-    bottle && setObjectData(bottle);
+    if (bottle) setObjectData(bottle);
   }, [bottle]);
 
   const onInputConfirm = () => {
@@ -71,10 +69,7 @@ export const InkTreeEditor = () => {
       method: appConfig?.updateConfig?.preferredMethod || "patch",
       maxBodyLength: Infinity,
       data: formData,
-      url: join(
-        appConfig?.backendUrl || "",
-        appConfig?.getConfig?.endpoint || "",
-      ),
+      url: `${appConfig?.backendUrl || ""}${appConfig?.getConfig?.endpoint || ""}`,
       ...(appConfig?.getConfig?.axiosConfig || {}),
     });
 

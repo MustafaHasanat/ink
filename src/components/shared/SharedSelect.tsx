@@ -1,27 +1,25 @@
 "use client";
 
-import React, { useId } from "react";
+import { useId } from "react";
 import { SelectOptionType } from "@/types";
-import { Control, Controller } from "react-hook-form";
+import { Control, Controller, Path } from "react-hook-form";
 
-interface Props {
+type Props<T extends object> = {
   options: SelectOptionType[];
-  name: string;
-  control: Control<any>;
+  name: Path<T>;
+  control: Control<T>;
   className?: string;
   postOnChange?: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-}
+};
 
-export const SharedSelect: React.FC<
-  React.HTMLAttributes<HTMLSelectElement> & Props
-> = ({
+export function SharedSelect<T extends object>({
   className = "",
   options,
   control,
   name,
   postOnChange,
   ...rest
-}: Props) => {
+}: Props<T>) {
   const uniqueId = useId();
 
   return (
@@ -34,7 +32,7 @@ export const SharedSelect: React.FC<
           className={`border p-2 rounded-md text-black bg-white ${className}`}
           onChange={(event) => {
             field?.onChange(event);
-            postOnChange && postOnChange(event);
+            if (postOnChange) postOnChange(event);
           }}
           {...rest}
         >
@@ -47,4 +45,4 @@ export const SharedSelect: React.FC<
       )}
     />
   );
-};
+}

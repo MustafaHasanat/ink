@@ -1,8 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-expressions */
 
 import { JSX, useCallback, useMemo, useState } from "react";
 import {
@@ -46,8 +42,9 @@ export const AppProvider = ({
     if (!config.locales.includes(config.currentLocale))
       throw new Error("The locales array does not contain 'currentLocale'");
 
-    config?.locales && setLocales(config?.locales);
-    config?.currentLocale && setLang(config?.currentLocale);
+    if (config?.locales) setLocales(config?.locales);
+
+    if (config?.currentLocale) setLang(config?.currentLocale);
 
     //! build the authorization process in kaiser website for ink
     // await authorize({
