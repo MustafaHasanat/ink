@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 import { ViewerContextState } from "@/types";
 
 export const ViewerContext = createContext<ViewerContextState>({
@@ -10,3 +10,13 @@ export const ViewerContext = createContext<ViewerContextState>({
   setCurrentComponentKey: async () => {},
   setCurrentDropKey: async () => {},
 });
+
+export const useViewerContext = () => {
+  const context = useContext(ViewerContext);
+
+  if (!context) {
+    throw new Error("useViewerContext must be used within a ViewerProvider");
+  }
+
+  return context;
+};

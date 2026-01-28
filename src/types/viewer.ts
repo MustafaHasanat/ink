@@ -7,12 +7,13 @@ export type ViewerProviderProps = {
   components: InkProviderComponents;
 };
 
-export type InkProviderComponents = {
-  [componentName: string]: {
+export type InkProviderComponents = Record<
+  string,
+  {
     label: string;
     node: ReactNode;
-  };
-};
+  }
+>;
 
 export type ViewerContextState = {
   components: InkProviderComponents;

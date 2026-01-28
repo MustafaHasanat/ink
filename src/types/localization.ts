@@ -1,9 +1,8 @@
 "use client";
 
-import { AxiosRequestConfig } from "axios";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 
-export type AppProviderProps = {
+export type LocalizationProviderProps = {
   children: ReactNode;
   config: InkConfig;
 };
@@ -12,7 +11,7 @@ export type BottleType = { [key: string]: any };
 export type BottleDropType = { en: string; ar: string };
 export type InkMode = "view" | "edit";
 
-export type AppContextState = {
+export type LocalizationContextState = {
   bottle: BottleType;
   mode: InkMode;
   lang: string | null;
@@ -31,13 +30,12 @@ export type InkConfig = {
   currentLocale: string;
   getConfig: {
     endpoint: string;
-    axiosConfig?: AxiosRequestConfig<any>;
     responsePathToBottle: string[];
   };
   updateConfig: {
     endpoint: string;
-    axiosConfig?: AxiosRequestConfig<any>;
-    preferredMethod?: "put" | "patch";
+    endpointIdentifierKey: string;
+    preferredMethod?: "PUT" | "PATCH";
     requestFormDataKey: string;
     responsePathToBottle: string[];
   };

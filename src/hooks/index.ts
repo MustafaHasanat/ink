@@ -1,3 +1,4 @@
 export * from "./helpers";
-export * from "./useInkContext";
-export * from "./useInk";
+export * from "./use-ink-context";
+export * from "./use-ink";
+export * from "./data";

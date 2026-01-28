@@ -1,2 +1,2 @@
-export * from "./SharedText";
-export * from "./SharedSelect";
+export * from "./Text";
+export * from "./select";

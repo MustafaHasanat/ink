@@ -3,25 +3,28 @@
 import { JSX, useCallback, useMemo, useState } from "react";
 import {
   BottleType,
-  AppContextState,
+  LocalizationContextState,
   InkMode,
-  AppProviderProps,
+  LocalizationProviderProps,
   InkConfig,
 } from "@/types";
-import { useRunOnce } from "@/hooks";
-import { getBottleData } from "@/helpers";
-import { AppContext } from "@/context";
-import { PathAnnotation } from "@/components";
+import { useGetBottle, useRunOnce } from "@/hooks";
+import { LocalizationContext, useEditorContext } from "@/context";
 
-export const AppProvider = ({
+export const LocalizationProvider = ({
   children,
   config,
-}: AppProviderProps): JSX.Element => {
+}: LocalizationProviderProps): JSX.Element => {
+  const { setOldObjectData } = useEditorContext();
+  const { mutateAsync: getBottleData } = useGetBottle({ config });
+
   const [bottle, setBottle] = useState<BottleType>({});
   const [mode, setMode] = useState<InkMode>("view");
-  const [lang, setLang] = useState<string | null>(null);
-  const [locales, setLocales] = useState<string[]>([]);
-  const [appConfig, setAppConfig] = useState<InkConfig | null>(null);
+  const [lang, setLang] = useState<string | null>(
+    config?.currentLocale || null,
+  );
+  const [locales, setLocales] = useState<string[]>(config?.locales || []);
+  const [appConfig, setAppConfig] = useState<InkConfig | null>(config || null);
 
   const initInk = useCallback(async () => {
     setAppConfig(config);
@@ -32,7 +35,7 @@ export const AppProvider = ({
       !config?.currentLocale ||
       !config?.updateConfig ||
       !config?.getConfig ||
-      Object.keys(config?.getConfig).length !== 3 || //! update this number whenever you change the props
+      Object.keys(config?.getConfig).length !== 2 || //! update this number whenever you change the props
       Object.keys(config?.updateConfig).length !== 5 //! update this number whenever you change the props
     )
       throw new Error(
@@ -46,24 +49,26 @@ export const AppProvider = ({
 
     if (config?.currentLocale) setLang(config?.currentLocale);
 
-    //! build the authorization process in kaiser website for ink
+    //! build the authorization process in the website for ink
     // await authorize({
     //     email: config?.credentials?.email,
     //     pass: config?.credentials?.pass,
     // });
 
-    const bottle = await getBottleData({ config });
+    const bottle = await getBottleData();
 
     if (bottle) {
       setBottle(bottle);
+      setOldObjectData(bottle);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config]);
 
   useRunOnce({
     fn: initInk,
   });
 
-  const inkProviderValue: AppContextState = useMemo(
+  const inkProviderValue: LocalizationContextState = useMemo(
     () => ({
       bottle,
       mode,
@@ -91,9 +96,8 @@ export const AppProvider = ({
   );
 
   return (
-    <AppContext.Provider value={inkProviderValue}>
+    <LocalizationContext.Provider value={inkProviderValue}>
       {children}
-      <PathAnnotation />
-    </AppContext.Provider>
+    </LocalizationContext.Provider>
   );
 };

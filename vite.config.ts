@@ -6,7 +6,7 @@ import dts from "vite-plugin-dts";
 
 export default defineConfig({
   server: {
-    port: 3000,
+    port: 3006,
   },
   plugins: [
     react(),
@@ -26,8 +26,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "./src/index.ts"),
-      name: "EmperorUI",
-      fileName: "emperor-ui",
+      name: "Ink",
+      fileName: "ink",
     },
     cssCodeSplit: false,
     rollupOptions: {

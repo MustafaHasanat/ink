@@ -1,3 +1,5 @@
+import { BottleType } from "./localization";
+
 export type TGeneric<T> = T | null;
 
 export type ListResponse<T> = {
@@ -25,6 +27,12 @@ export type PaginationParams = {
   page_size?: number;
   page?: number;
   enabled?: boolean;
+};
+
+export type BottleResponse = {
+  id: string;
+  key: string;
+  value: BottleType;
 };
 
 export type AxiosContentType =
