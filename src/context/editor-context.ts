@@ -12,6 +12,8 @@ export const EditorContext = createContext<EditorContextState>({
   setOldObjectData: () => {},
   errors: [],
   handleNodeAction: () => {},
+  isUpdating: false,
+  setIsUpdating: () => {},
 });
 
 export const useEditorContext = () => {
