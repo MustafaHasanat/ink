@@ -3,7 +3,7 @@
 import { useInk } from "@/hooks";
 
 export function LoginPage() {
-  const { ink } = useInk({ key: "auth" });
+  const { ink, inkText } = useInk({ key: "auth" });
 
   return (
     <div className="min-h-screen text-black flex items-center justify-center p-4 bg-linear-to-b from-gray-50 to-gray-100">
@@ -29,6 +29,7 @@ export function LoginPage() {
               id="email"
               name="email"
               type="email"
+              placeholder={inkText("login.labels.emailPlaceholder")}
               required
               className="px-3 py-2.5 rounded-xl border border-slate-200 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />

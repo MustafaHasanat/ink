@@ -7,7 +7,7 @@ export type LocalizationProviderProps = {
   config: InkConfig;
 };
 
-export type BottleType = { [key: string]: any };
+export type BottleType = Record<string, any>;
 export type BottleDropType = { en: string; ar: string };
 export type InkMode = "view" | "edit";
 
@@ -32,12 +32,22 @@ export type InkConfig = {
     endpoint: string;
     responsePathToBottle: string[];
   };
+  createConfig: {
+    endpoint: string;
+    requestFormDataKey: string;
+    bodyShape: "formData" | "json";
+  };
   updateConfig: {
     endpoint: string;
     endpointIdentifierKey: string;
     preferredMethod?: "PUT" | "PATCH";
     requestFormDataKey: string;
     responsePathToBottle: string[];
+    bodyShape: "formData" | "json";
+  };
+  deleteConfig: {
+    endpoint: string;
+    endpointIdentifierKey: string;
   };
   credentials: {
     email: string;

@@ -97,6 +97,9 @@ export const TreeNode = ({
           node={node}
           identifier={identifier}
           isLocaleContainer={isLocaleContainer}
+          hideDelete={
+            isLeaf && !!identifier && locales.includes(identifier.toLowerCase())
+          }
         />
 
         <NodeFieldPath fieldPath={fieldPath} />
@@ -105,12 +108,10 @@ export const TreeNode = ({
       {isOpen &&
         typeof node === "object" &&
         Object.entries(node).map(([subIdentifier, subNode]) => {
-          const nodeKeys = Object.keys(subNode);
-
           const isLocaleContainer: boolean =
-            nodeKeys.length === locales.length &&
-            nodeKeys.filter((key) => locales.includes(key?.toLowerCase()))
-              .length > 0;
+            Object.keys(subNode).filter((key) =>
+              locales.includes(key?.toLowerCase()),
+            ).length > 0;
 
           return (
             <TreeNode

@@ -1,6 +1,6 @@
 "use client";
 
-import { CSSProperties, JSX, ReactNode, useMemo, useState } from "react";
+import { CSSProperties, ReactNode, useMemo, useState } from "react";
 import { useInkContext } from "@/hooks";
 
 interface Props {
@@ -16,7 +16,7 @@ interface Props {
  *
  * @returns the final ink-component
  */
-export const InkBrushElement = ({ id, children }: Props): JSX.Element => {
+export function InkBrushElement({ id, children }: Props) {
   const [isHover, setIsHover] = useState(false);
   const { setCurrentDropKey } = useInkContext();
 
@@ -55,4 +55,4 @@ export const InkBrushElement = ({ id, children }: Props): JSX.Element => {
       {children}
     </span>
   );
-};
+}

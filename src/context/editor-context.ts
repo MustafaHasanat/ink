@@ -7,9 +7,10 @@ export const EditorContext = createContext<EditorContextState>({
   inputData: null,
   setInputData: () => {},
   objectData: null,
-  oldObjectData: null,
   setObjectData: () => {},
+  oldObjectData: null,
   setOldObjectData: () => {},
+  errors: [],
   handleNodeAction: () => {},
 });
 

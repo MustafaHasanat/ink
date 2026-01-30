@@ -9,12 +9,22 @@ export const defaultInkConfig: InkConfig = {
     endpoint: "/locales",
     responsePathToBottle: ["data"],
   },
+  createConfig: {
+    endpoint: "/locales",
+    requestFormDataKey: "key",
+    bodyShape: "formData",
+  },
   updateConfig: {
     endpoint: "/locales/KEY",
     endpointIdentifierKey: "KEY",
     responsePathToBottle: ["data"],
     preferredMethod: "PATCH",
-    requestFormDataKey: "data",
+    requestFormDataKey: "value",
+    bodyShape: "formData",
+  },
+  deleteConfig: {
+    endpoint: "/locales/KEY",
+    endpointIdentifierKey: "KEY",
   },
   credentials: {
     email: "",

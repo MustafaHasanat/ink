@@ -6,3 +6,4 @@ export * from "./node-toggle-button";
 export * from "./node-input-field";
 export * from "./node-actions";
 export * from "./node-field-path";
+export * from "./errors-box";

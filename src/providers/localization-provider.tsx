@@ -9,13 +9,12 @@ import {
   InkConfig,
 } from "@/types";
 import { useGetBottle, useRunOnce } from "@/hooks";
-import { LocalizationContext, useEditorContext } from "@/context";
+import { LocalizationContext } from "@/context";
 
 export const LocalizationProvider = ({
   children,
   config,
 }: LocalizationProviderProps): JSX.Element => {
-  const { setOldObjectData } = useEditorContext();
   const { mutateAsync: getBottleData } = useGetBottle({ config });
 
   const [bottle, setBottle] = useState<BottleType>({});
@@ -33,10 +32,15 @@ export const LocalizationProvider = ({
       !config?.locales ||
       !config?.backendUrl ||
       !config?.currentLocale ||
-      !config?.updateConfig ||
       !config?.getConfig ||
-      Object.keys(config?.getConfig).length !== 2 || //! update this number whenever you change the props
-      Object.keys(config?.updateConfig).length !== 5 //! update this number whenever you change the props
+      !config?.createConfig ||
+      !config?.updateConfig ||
+      !config?.deleteConfig ||
+      //! update this number whenever you change the props
+      Object.keys(config?.getConfig).length !== 2 ||
+      Object.keys(config?.createConfig).length !== 3 ||
+      Object.keys(config?.deleteConfig).length !== 2 ||
+      Object.keys(config?.updateConfig).length !== 6
     )
       throw new Error(
         "'Ink' config object is partially undefined, assure you filled all props properly.",
@@ -59,7 +63,6 @@ export const LocalizationProvider = ({
 
     if (bottle) {
       setBottle(bottle);
-      setOldObjectData(bottle);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [config]);

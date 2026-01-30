@@ -9,7 +9,7 @@ import {
   NodeActionProps,
 } from "@/types";
 import { EditorContext, useLocalizationContext } from "@/context";
-import { treeHandler } from "@/helpers";
+import { collectEditorErrors, treeHandler } from "@/helpers";
 
 export const EditorProvider = ({
   children,
@@ -19,12 +19,13 @@ export const EditorProvider = ({
   const [inputData, setInputData] = useState<InputDataType>(null);
   const [objectData, setObjectData] = useState<BottleType | null>(null);
   const [oldObjectData, setOldObjectData] = useState<BottleType | null>(null);
+  const [isUpdating, setIsUpdating] = useState<boolean>(false);
 
   const handleNodeAction = useCallback(
     ({ action, path, value }: NodeActionProps) => {
-      setObjectData(
-        treeHandler<typeof objectData>({
-          node: objectData,
+      setObjectData((previousObjectData) =>
+        treeHandler<typeof previousObjectData>({
+          node: previousObjectData,
           splittedPath: path !== "" ? path?.split(".") : [],
           action,
           identifier: null,
@@ -34,6 +35,17 @@ export const EditorProvider = ({
         }),
       );
     },
+    [locales],
+  );
+
+  const errors = useMemo(
+    () =>
+      objectData
+        ? collectEditorErrors({
+            node: objectData,
+            locales,
+          })
+        : [],
     [objectData, locales],
   );
 
@@ -42,12 +54,22 @@ export const EditorProvider = ({
       inputData,
       setInputData,
       objectData,
-      oldObjectData,
       setObjectData,
+      oldObjectData,
       setOldObjectData,
+      errors,
+      isUpdating,
+      setIsUpdating,
       handleNodeAction,
     }),
-    [inputData, objectData, oldObjectData, handleNodeAction],
+    [
+      inputData,
+      objectData,
+      oldObjectData,
+      errors,
+      isUpdating,
+      handleNodeAction,
+    ],
   );
 
   return (

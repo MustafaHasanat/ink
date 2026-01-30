@@ -11,8 +11,11 @@ export type EditorContextState = {
   inputData: InputDataType | null;
   setInputData: Dispatch<SetStateAction<InputDataType | null>>;
   objectData: BottleType | null;
-  oldObjectData: BottleType | null;
   setObjectData: Dispatch<SetStateAction<BottleType | null>>;
+  oldObjectData: BottleType | null;
   setOldObjectData: Dispatch<SetStateAction<BottleType | null>>;
+  errors: string[];
+  isUpdating: boolean;
+  setIsUpdating: Dispatch<SetStateAction<boolean>>;
   handleNodeAction: (props: NodeActionProps) => void;
 };

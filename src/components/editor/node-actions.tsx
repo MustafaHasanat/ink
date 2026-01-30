@@ -40,12 +40,14 @@ export function NodeActions({
   node,
   identifier,
   isLocaleContainer,
+  hideDelete = false,
 }: {
   currentValue: string;
   fieldPath: string;
   node: LocaleNode;
   identifier: string | null;
   isLocaleContainer: boolean;
+  hideDelete?: boolean;
 }) {
   const { setInputData, handleNodeAction } = useInkContext();
 
@@ -68,7 +70,7 @@ export function NodeActions({
         </ActionIconButton>
       )}
 
-      {isObject && identifier && (
+      {identifier && !hideDelete && (
         <ActionIconButton
           className="bg-rose-50 text-rose-600 hover:bg-rose-100"
           onClick={() =>

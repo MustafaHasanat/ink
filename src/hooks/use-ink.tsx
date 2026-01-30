@@ -22,5 +22,16 @@ export function useInk({ key }: { key: string }) {
     [bottle, key, lang],
   );
 
-  return { ink, lang, bottle };
+  const inkText = useCallback(
+    (chain: string): string => {
+      const drop: any = getBottleDrop(bottle?.[key] || {}, chain);
+
+      if (!drop || !lang) return "";
+
+      return drop[lang] as string;
+    },
+    [bottle, key, lang],
+  );
+
+  return { ink, inkText, lang, bottle };
 }

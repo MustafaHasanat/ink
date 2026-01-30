@@ -128,7 +128,7 @@ export function Select<T extends object>({
                         whileTap={{ scale: 0.99 }}
                         className={cn(
                           "flex w-full items-center justify-between gap-2 px-3 py-2.5 text-left text-sm font-normal text-gray-900 transition-colors duration-150",
-                          "hover:bg-gray-100 focus:bg-gray-100 focus:outline-none",
+                          "hover:bg-gray-100 focus:bg-gray-100 focus:outline-none cursor-pointer",
                           isSelected && "bg-primary/10 text-primary",
                         )}
                       >
