@@ -1,3 +1,1 @@
-export enum Endpoints {
-  AUTHORIZE = "ink/authorize",
-}
+export enum Endpoints {}

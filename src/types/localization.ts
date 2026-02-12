@@ -14,14 +14,12 @@ export type InkMode = "view" | "edit";
 export type LocalizationContextState = {
   bottle: BottleType;
   mode: InkMode;
-  lang: string | null;
   locales: string[];
   appConfig: InkConfig | null;
   setAppConfig: Dispatch<SetStateAction<InkConfig | null>>;
   setLocales: Dispatch<SetStateAction<string[]>>;
   getBottle: () => Promise<void>;
   setMode: Dispatch<SetStateAction<InkMode>>;
-  setLang: Dispatch<SetStateAction<string | null>>;
 };
 
 export type InkConfig = {

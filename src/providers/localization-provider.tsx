@@ -8,7 +8,7 @@ import {
   LocalizationProviderProps,
   InkConfig,
 } from "@/types";
-import { useGetBottle, useRunOnce } from "@/hooks";
+import { useGetBottle, useI18n, useRunOnce } from "@/hooks";
 import { LocalizationContext } from "@/context";
 
 export const LocalizationProvider = ({
@@ -16,12 +16,11 @@ export const LocalizationProvider = ({
   config,
 }: LocalizationProviderProps): JSX.Element => {
   const { mutateAsync: getBottleData } = useGetBottle({ config });
+  const { switchLang } = useI18n();
 
   const [bottle, setBottle] = useState<BottleType>({});
   const [mode, setMode] = useState<InkMode>("view");
-  const [lang, setLang] = useState<string | null>(
-    config?.currentLocale || null,
-  );
+
   const [locales, setLocales] = useState<string[]>(config?.locales || []);
   const [appConfig, setAppConfig] = useState<InkConfig | null>(config || null);
 
@@ -51,13 +50,9 @@ export const LocalizationProvider = ({
 
     if (config?.locales) setLocales(config?.locales);
 
-    if (config?.currentLocale) setLang(config?.currentLocale);
+    if (config?.currentLocale) switchLang(config?.currentLocale);
 
     //! build the authorization process in the website for ink
-    // await authorize({
-    //     email: config?.credentials?.email,
-    //     pass: config?.credentials?.pass,
-    // });
 
     const bottle = await getBottleData();
 
@@ -75,24 +70,20 @@ export const LocalizationProvider = ({
     () => ({
       bottle,
       mode,
-      lang,
       locales,
       appConfig,
       setAppConfig,
       setLocales,
-      setLang,
       getBottle: initInk,
       setMode,
     }),
     [
       bottle,
       mode,
-      lang,
       locales,
       appConfig,
       setAppConfig,
       setLocales,
-      setLang,
       initInk,
       setMode,
     ],

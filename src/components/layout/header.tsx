@@ -2,7 +2,7 @@
 "use client";
 
 import { JSX } from "react";
-import { Select } from "@/components";
+import { ControlledSelect } from "@/components";
 import { InkMode } from "@/types";
 import { useInkContext } from "@/hooks";
 import { useForm } from "react-hook-form";
@@ -16,14 +16,8 @@ import { cn } from "@/utils";
  * @returns the header of the app
  */
 export const Header = (): JSX.Element => {
-  const {
-    components,
-    locales,
-    setCurrentComponentKey,
-    mode,
-    setMode,
-    setLang,
-  } = useInkContext();
+  const { components, locales, setCurrentComponentKey, mode, setMode } =
+    useInkContext();
 
   const { control } = useForm<InkBrushHeaderSchemaType>({
     mode: "all",
@@ -39,7 +33,7 @@ export const Header = (): JSX.Element => {
     >
       {mode === "view" && (
         <>
-          <Select<InkBrushHeaderSchemaType>
+          <ControlledSelect
             name="component"
             control={control}
             postOnChange={(event) => {
@@ -57,12 +51,12 @@ export const Header = (): JSX.Element => {
             ]}
           />
 
-          <Select
+          <ControlledSelect
             name="lang"
             control={control}
-            postOnChange={(event) => {
-              setLang(event.target.value as InkMode);
-            }}
+            // postOnChange={(event) => {
+            //   switchLang(event.target.value);
+            // }}
             options={[
               {
                 label: "Select language",
@@ -80,7 +74,7 @@ export const Header = (): JSX.Element => {
         </>
       )}
 
-      <Select<InkBrushHeaderSchemaType>
+      <ControlledSelect
         name="mode"
         control={control}
         postOnChange={(event) => {

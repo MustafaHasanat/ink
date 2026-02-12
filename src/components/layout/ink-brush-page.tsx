@@ -1,7 +1,7 @@
 "use client";
 
 import { JSX, useMemo } from "react";
-import { useRunOnce, useInkContext } from "@/hooks";
+import { useRunOnce, useInkContext, useI18n } from "@/hooks";
 import {
   InkTreeEditor,
   ViewEmptyComponent,
@@ -25,8 +25,8 @@ import {
  * @returns the ink admin page
  */
 export const InkBrushPage = (): JSX.Element => {
-  const { components, currentComponentKey, setMode, lang, mode } =
-    useInkContext();
+  const { components, currentComponentKey, setMode, mode } = useInkContext();
+  const { lang } = useI18n();
 
   const isEdit = mode === "edit";
   const isView = mode === "view";

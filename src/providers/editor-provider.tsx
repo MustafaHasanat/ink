@@ -9,7 +9,7 @@ import {
   NodeActionProps,
 } from "@/types";
 import { EditorContext, useLocalizationContext } from "@/context";
-import { collectEditorErrors, treeHandler } from "@/helpers";
+import { collectEditorErrors, treeHandler } from "@/utils";
 
 export const EditorProvider = ({
   children,

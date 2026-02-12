@@ -6,12 +6,10 @@ import { LocalizationContextState } from "@/types";
 export const LocalizationContext = createContext<LocalizationContextState>({
   bottle: {},
   mode: "view",
-  lang: null,
   locales: [],
   appConfig: null,
   setAppConfig: () => {},
   setLocales: () => {},
-  setLang: () => {},
   setMode: () => {},
   getBottle: async () => {},
 });

@@ -6,7 +6,7 @@ import dts from "vite-plugin-dts";
 
 export default defineConfig({
   server: {
-    port: 3006,
+    port: 3000,
   },
   plugins: [
     react(),
