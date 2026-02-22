@@ -62,7 +62,6 @@
     "husky": "^9.1.7",
     "lucide-react": "^0.560.0",
     "motion": "^12.26.2",
-    "next": "^16.1.6",
     "prettier": "^3.7.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",

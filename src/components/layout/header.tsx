@@ -54,9 +54,6 @@ export const Header = (): JSX.Element => {
           <ControlledSelect
             name="lang"
             control={control}
-            // postOnChange={(event) => {
-            //   switchLang(event.target.value);
-            // }}
             options={[
               {
                 label: "Select language",

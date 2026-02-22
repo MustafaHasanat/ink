@@ -1,13 +1,19 @@
 "use client";
 
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+
+const getLang = (pathname: string) => {
+  return pathname.split("/")[1];
+};
 
 export function useI18n() {
-  const params = useParams();
-  const lang = (params?.lang as string) || "ar";
-  const pathName = usePathname();
-  const router = useRouter();
+  const { lang } = useMemo(() => {
+    if (typeof window === "undefined") return { lang: "en" };
+
+    const lang = getLang(window.location.pathname);
+
+    return { lang };
+  }, []);
 
   const isRtl: boolean = useMemo(() => lang === "ar", [lang]);
 
@@ -16,26 +22,17 @@ export function useI18n() {
     [lang],
   );
 
-  const toggleLang = async () => {
-    const parts = pathName.split("/");
-    const newLang = lang === "ar" ? "en" : "ar";
-    parts[1] = newLang;
-
-    router.push(`${parts.join("/")}`);
-  };
-
-  const switchLang = async (lang: string) => {
-    const parts = pathName.split("/");
+  const switchLang = useCallback(async (lang: string) => {
+    const parts = window.location.pathname.split("/");
     parts[1] = lang;
 
-    router.push(`${parts.join("/")}`);
-  };
+    // const newPath = parts.join("/");
+  }, []);
 
   return {
     lang,
     isRtl,
     dir,
-    toggleLang,
     switchLang,
   };
 }

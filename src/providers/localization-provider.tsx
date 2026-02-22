@@ -8,7 +8,7 @@ import {
   LocalizationProviderProps,
   InkConfig,
 } from "@/types";
-import { useGetBottle, useI18n, useRunOnce } from "@/hooks";
+import { useGetBottle, useRunOnce } from "@/hooks";
 import { LocalizationContext } from "@/context";
 
 export const LocalizationProvider = ({
@@ -16,7 +16,6 @@ export const LocalizationProvider = ({
   config,
 }: LocalizationProviderProps): JSX.Element => {
   const { mutateAsync: getBottleData } = useGetBottle({ config });
-  const { switchLang } = useI18n();
 
   const [bottle, setBottle] = useState<BottleType>({});
   const [mode, setMode] = useState<InkMode>("view");
@@ -49,8 +48,6 @@ export const LocalizationProvider = ({
       throw new Error("The locales array does not contain 'currentLocale'");
 
     if (config?.locales) setLocales(config?.locales);
-
-    if (config?.currentLocale) switchLang(config?.currentLocale);
 
     //! build the authorization process in the website for ink
 
